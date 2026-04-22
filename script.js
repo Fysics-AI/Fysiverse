@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'rigid-collision': 'vid/sec2/apple_slide_website.mp4',
     };
 
-    matVideo.src = videoMap['rigid'];
-    currentMatButton.classList.add('active');
+    // matVideo.src = videoMap['rigid'];
+    // currentMatButton.classList.add('active');
 
     matButtons.forEach(btn => {
         btn.addEventListener('click', function () {
@@ -285,10 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Demo Section Logic with Fixed Names
 document.addEventListener('DOMContentLoaded', () => {
-    const demoVideoPlayer = document.getElementById('demo-video-player');
+    // const demoVideoPlayer = document.getElementById('demo-video-player');
+    const demoVideoPlayer1 = document.getElementById('demo-video-player1');
+    const demoVideoPlayer2 = document.getElementById('demo-video-player2');
     const captionElement = document.getElementById('demo-caption');
     const textElement = document.getElementById('demo-text-caption');
-    if (!demoVideoPlayer) return;
+    // if (!demoVideoPlayer) return;
 
     const demoButtonGroup = document.querySelector('.demo-button-group');
     const compItems = [
@@ -346,17 +348,24 @@ document.addEventListener('DOMContentLoaded', () => {
         demoButtonGroup.appendChild(btn);
     });
 
-    const firstSrc = `vid/sec5/open_laptop_output_website.mp4`;
-    demoVideoPlayer.src = firstSrc;
-    demoVideoPlayer.load();
-    demoVideoPlayer.play().catch(e => console.warn("Initial auto-play prevented:", e));
+    const firstSrc1 = `vid/sec5/open_laptop_output_3x4.mp4`;
+    demoVideoPlayer1.src = firstSrc1;
+    demoVideoPlayer1.load();
+    demoVideoPlayer1.play().catch(e => console.warn("Initial auto-play prevented:", e));
+    const firstSrc2 = `vid/sec5/place_bread_skillet_output_3x4.mp4`;
+    demoVideoPlayer2.src = firstSrc2;
+    demoVideoPlayer2.load();
+    demoVideoPlayer2.play().catch(e => console.warn("Initial auto-play prevented:", e));
 });
 
 // PGBench vs DAVIS Comparison Section
 document.addEventListener('DOMContentLoaded', () => {
-    const compVideoPlayer = document.getElementById('comparison-video-player');
+    // const compVideoPlayer = document.getElementById('comparison-video-player');
+    const compVideoPlayer1 = document.getElementById('comparison-video-player1');
+    const compVideoPlayer2 = document.getElementById('comparison-video-player2');
+    const compVideoPlayer3 = document.getElementById('comparison-video-player3');
     const captionElement = document.getElementById('comparison-caption');
-    if (!compVideoPlayer) return;
+    // if (!compVideoPlayer) return;
 
     const compButtonGroup = document.querySelector('.comparison-button-group');
     const compItems = [
@@ -407,9 +416,16 @@ document.addEventListener('DOMContentLoaded', () => {
         compButtonGroup.appendChild(btn);
     });
 
-    compVideoPlayer.src = `vid/sec9/${compItems[0].file}`;
-    compVideoPlayer.load();
-    compVideoPlayer.play().catch(e => console.warn("Initial auto-play prevented in comparison:", e));
+    // compVideoPlayer.src = `vid/sec9/${compItems[0].file}`;
+    compVideoPlayer1.src = `vid/sec9/shelf_domino_3x4_website.mp4`;
+    compVideoPlayer1.load();
+    compVideoPlayer1.play().catch(e => console.warn("Initial auto-play prevented in comparison:", e));
+    compVideoPlayer2.src = `vid/sec9/bear_bounce_3x4_website.mp4`;
+    compVideoPlayer2.load();
+    compVideoPlayer2.play().catch(e => console.warn("Initial auto-play prevented in comparison:", e));
+    compVideoPlayer3.src = `vid/sec9/bunny_fluid_3x4_website.mp4`;
+    compVideoPlayer3.load();
+    compVideoPlayer3.play().catch(e => console.warn("Initial auto-play prevented in comparison:", e));
 });
 
 // Limitation Cases Section Logic
