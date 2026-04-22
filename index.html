@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fysiverse: Towards Physics-Grounded World Model via Enforcing Causal Physical Consistency</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><img src="img/glass.png" alt="icon" style="width: 8%;">&nbspFysiverse: Towards Physics-Grounded World Model via Enforcing Causal Physical Consistency</h1>
+    </header>
+
+    <section class="video-carousel">
+        <div class="carousel-container">
+            <button class="prev-btn" onclick="prevVideo()">◀</button>
+            <div class="video-wrapper">
+                <video id="video-player" controls autoplay muted loop>
+                    <source src="vid/sec1/bear_bounce_16.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <button class="next-btn" onclick="nextVideo()">▶</button>
+        </div>
+
+        <div class="dots" id="dots-container"></div>
+    </section>
+
+    <section class="abstract">
+        <h2>Abstract</h2>
+        <p>
+            World models are promising for embodied intelligence, but existing methods still struggle to maintain physical consistency in generated videos.
+            A practical direction is to combine physics simulation with video generation, yet current pipelines remain limited by unreliable physical parameter estimation and weak physical conditioning.
+            We propose Fysiverse, a physics-grounded world model that addresses these bottlenecks through a unified real-to-sim and sim-to-real pipeline.
+            For the real-to-sim stage, we introduce PGReason, which grounds material parameter estimation by retrieving validated material properties from a retrieval-augmented database and analyzing surface reflectance for friction estimation, providing reliable inputs for physics simulation.
+            For the sim-to-real stage, we present PGConds, which transforms simulated dynamics into instance masks, depth maps, and tracking cues to provide video diffusion models with richer constraints on object interactions, spatial structure, and motion.
+            Extensive quantitative and qualitative experimental results indicate that Fysiverse outperforms existing approaches in both visual fidelity and physical consistency.
+        </p>
+    </section>
+
+    <!-- Pipeline Section with Caption -->
+    <section class="pipeline">
+        <img src="img/pipeline.jpg" alt="PhysPoints Framework Pipeline" style="max-width: 60%; height: auto; display: block; margin: 0 auto;">
+        <p class="pipeline_caption">Fysiverse 框架</p>
+    </section>
+
+    <!-- Material & Collision Section -->
+    <section class="material-section">
+        <h2>不同的物理材质 !</h2>
+
+        <div class="button-group">
+            <button class="mat-btn" data-vid="rigid">刚体</button>
+            <button class="mat-btn" data-vid="elastic">弹性体</button>
+            <button class="mat-btn" data-vid="plastic">塑性体</button>
+            <button class="mat-btn" data-vid="balloon">气球</button>
+            <button class="mat-btn" data-vid="fluid">流体</button>
+            <button class="mat-btn" data-vid="sand">沙子</button>
+            <button class="mat-btn" data-vid="lava">熔岩</button>
+            <button class="mat-btn" data-vid="rigid-collision">刚体碰撞</button>
+        </div>
+
+        <div class="material-video-container">
+            <video id="material-video-player" controls width="720" height="480">
+                <source src="vid/sec2/bunny_rigid_16.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- Direction + Speed Control Wrapper -->
+    <div class="controls-wrapper">
+        <!-- Direction Control (NEW) -->
+        <section class="direction-control">
+            <h2>将小熊往不同方向弹跳 !</h2>
+            <div class="direction-container">
+                <canvas id="direction-canvas" width="720" height="480"></canvas>
+                <video id="direction-video-player" controls width="720" height="480" style="display: none;">
+                    <source src="vid/sec4/bear_0_16.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Speed Control (EXISTING) -->
+        <section class="speed-control"style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+            <h2>加速撞开障碍 !</h2>
+            
+            <div class="speed-container">
+                <div class="speed-video-container">
+                    <video id="speed-video-player" controls width="720" height="480">
+                        <source src="vid/sec4/speed_1_16.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="vertical-slider-wrapper">
+                    <input type="range" id="intensity-slider" min="1" max="5" value="1" orient="vertical">
+                    <span id="intensity-value">1</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <p class="warn_caption">
+        如果发生了重叠, 请缩小观看。
+    </p>
+
+    <!-- Elastic Control Section -->
+    <section class="elastic-control" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+        <h2>弹性控制</h2>
+
+        <div class="elastic-container">
+            <div class="elastic-video-container">
+                <video id="elastic-video-player" controls width="720" height="480">
+                    <source src="vid/sec12/k_1_website.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="vertical-slider-wrapper">
+                <input type="range" id="elastic-slider" min="1" max="3" value="1" orient="vertical">
+                <span id="elastic-value">1</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Comparison Section: PGBench vs DAVIS -->
+    <section class="comparison-section">
+        <h2>定性对比实验（PGBench）</h2>
+
+        <div class="comparison-button-group">
+        </div>
+
+        <div class="comparison-video-container">
+            <video id="comparison-video-player" controls width="1800" height="600" loop>
+                <source src="vid/sec9/shelf_domino_website.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <p id="comparison-caption" class="demo-caption">
+            文本: 地上放着四个柜子，最左边的那个向右倒下，结果把其他的柜子也带倒了。
+        </p>
+    </section>
+
+    <!-- New Demo Section -->
+    <section class="demo-section">
+        <h2>定性对比实验（WorldArena）</h2>
+
+        <div class="demo-button-group">
+        </div>
+
+        <p id="demo-text-caption" class="demo-text-caption">
+        </p>
+
+        <div class="demo-video-container">
+            <video id="demo-video-player" controls width="1200" height="400">
+                <source src="vid/sec5/open_laptop_output_website.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <p id="demo-caption" class="demo-caption">
+            文本: 用左臂稳稳地抬起那台屏幕平整的翻盖式笔记本电脑。
+        </p>
+    </section>
+
+    <!-- Ablation Study Section 2 -->
+    <section class="ablation2-section">
+        <h2>消融实验: 每个控制条件的贡献</h2>
+        <div class="ablation2-video-container">
+            <video id="ablation2-video-player" controls width="1200" height="400" loop>
+                <source src="vid/sec7/ablation_soccer_website.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <p class="caption">
+            我们进行了消融实验，以评估掩膜、深度图和跟踪线索各自的贡献。仅使用掩膜时，由于缺乏全局上下文和空间线索，会导致摄像机视角漂移、背景不稳定，且足球仅发生平移而没有可见的旋转。
+            在引入深度图作为空间感知条件后，场景的稳定性和运动控制都得到了改善。
+            最后，跟踪线索提供了具体的物体运动引导，从而使足球产生了明显的旋转运动。
+        </p>
+    </section>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
