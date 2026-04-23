@@ -49,6 +49,59 @@ header {
     font-size: 1.3rem;
 }
 
+.limitations-list {
+    text-align: justify;
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.2rem;
+    padding-left: 40px;
+    margin: 10px 0;
+}
+
+.limitations-list li {
+    margin-bottom: 10px;
+}
+
+.fysiverse-list {
+    text-align: justify;
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.2rem;
+    padding-left: 40px;
+    margin: 10px 0;
+}
+
+.fysiverse-list li {
+    margin-bottom: 10px;
+}
+
+.result-section {
+    text-align: center;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.result-section img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.result-list {
+    text-align: justify;
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.1rem;
+    padding-left: 40px;
+    margin: 10px auto;
+    max-width: 1000px;
+}
+
+.result-list li {
+    margin-bottom: 15px;
+}
+
 h1 {
     font-size: 2.5rem;
     font-weight: 700;

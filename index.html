@@ -19,23 +19,39 @@
     </section>
 
     <section class="category-worldmodel">
-        <h1>现有世界模型调研</h1>
+        <h1>现有世界模型</h1>
         <br>
         <img src="img/category_1_wm.png">
-        <p>基于视频生成的世界模型：通过在互联网海量的视频中学习通用的世界知识，以条件生成的方式模拟世界（文/图生视频）。其优点是学习到了文本描述和视频像素的相关性，视觉质量与真实世界一致。但由于这种学习范式学习到的是数据“相关性”而非“因果性”，因此其结果常常违背物理规律。</p>
+        <p>基于视频生成的世界模型：通过在互联网海量的视频中学习通用的世界知识，以条件生成的方式模拟世界（文/图生视频）。例如 OpenAI Sora，Google DeepMind Genie，NVIDIA Cosmos。</p>
+        <p>局限性：</p>
+        <ul class="limitations-list">
+            <li><strong>物理精确性存疑：</strong>模型学习的是像素层面的统计规律，而非显式的物理定律。因此，它们生成的动态在细节上常常违反物理常识，即"物理幻觉"问题依然严重。</li>
+            <li><strong>缺乏显式3D表征：</strong>这些模型在2D像素空间进行操作，缺乏对世界的三维结构、物体几何形状和空间关系的显式理解。这使得它们难以进行需要精确空间推理的任务，如机器人抓取或导航。</li>
+            <li><strong>泛化能力有限：</strong>尽管可以生成多样的场景，但模型的能力仍然受限于训练数据的分布。对于训练数据中未出现过的物体交互或物理现象，模型的预测往往会失败。</li>
+        </ul>
         <br>
         <img src="img/category_2_wm.png">
-        <p>另一种基于视频的世界模型，隐式世界模型，同样也是通过视频世界模型学习世界的物理规律。然而，这种模型完全在隐空间进行推理，难以通过可视化的方式评估其视觉质量和物理真实性。</p>
+        <p>隐式世界模型，同样也是通过视频世界模型学习世界的物理规律。例如 V-JEPA。</p>
+        <p>局限性：</p>
+        <ul class="limitations-list">
+            <li><strong>缺乏视觉保真度：</strong>由于不生成像素，我们无法直观地"看到"模型的预测结果，这使得模型的调试和解释变得更加困难。</li>
+            <li><strong>表示的纠缠：</strong>潜在空间的质量至关重要。如果编码器未能学习到一个"好"的表示（即未能将世界的不同要素解耦），那么后续的预测和规划都将是无源之水。</li>
+        </ul>
+        <p>总的来说，隐式世界模型为解决Physical AI的核心痛点，特别是数据效率和泛化问题，提供了一条极具前景的道路。它代表了一种从“看清世界”到“理解世界”的认知飞跃，是构建高效、智能决策体的关键技术。</p>
         <br>
         <img src="img/category_3_wm.png">
-        <p>基于3D的世界模型：通过“重建-仿真-渲染”的模块化流程，实现对3D世界的推演，由于物理仿真的存在，推演结果是因果的。然而，重建环节需要对物体进行物理参数估计，现有的方案直接采用ChatGPT、Qwen、Gemini等视觉语言模型进行推理，由于推理过程缺乏物理依据，导致物理参数估计常常存在幻觉。此外，重建环节会将环境光、阴影等固定到物体的外观上，导致渲染的结果存在明显的伪影。</p>
+        <p>基于3D的世界模型：通过3D重建与生成技术，生成可漫游的3D世界。例如3DGS、NeRF、WorldLabs Marble。</p>
         <br>
-        <img src="img/category_4_wm.png">
-        <p>混合世界模型：将3D世界模型与2D视频世界模型相结合，提升世界模型推演结果的视觉保真性和物理真实性。其具体方法是，从3D世界模型的物理仿真的结果中提取轨迹信息，随后通过可控视频生成的方式将轨迹信息注入到视频生成模型中。这在一定程度上提升了视频世界模型的物理真实性，但由于轨迹信息不足以描述复杂的物理运动，其推演结果仍然存在物理不准确的缺陷。</p>
         <h1>Fysiverse介绍</h1>
         <br>
         <img src="img/fysiverse_1.png">
-        <p>我们提出Fysiverse，基于物理的世界模型。基于混合世界模型的架构下，Fysiverse分别在物理属性理解、物理世界推演两方面提出了创新方法。在物理属性理解方面，我们提出PGReason，是基于OmniFysics大模型构建的物理属性理解框架，为大模型构建了物理属性知识库，并引入基于反射的摩擦系数估计，为大模型提供物理参数推理依据。在物理世界推演方面，我们提出PGConds，融合了物体身份、空间认知、轨迹动态三种物理运动知识，作为强有力的物理约束注入到视频世界模型中。因此，Fysiverse在视觉保真度、物理真实性两方面领先现有的世界模型。</p>
+        <p>我们提出 Fysiverse，基于物理的世界模型。</p>
+        <ul class="fysiverse-list">
+            <li><strong>Real-to-Sim 阶段：</strong>首先实现自动化 3D 场景重建，同时提出 PGReason，基于 OmniFysics 大模型构建的物理属性理解框架，为大模型构建了物理属性知识库，提供物理参数推理依据。</li>
+            <li><strong>Sim-to-Sim 阶段：</strong>利用物理引擎完成物体的运动推演。</li>
+            <li><strong>Sim-to-Real 阶段：</strong>提出 PGConds，融合了物体身份、空间认知、轨迹动态三种物理运动知识，作为强有力的物理约束注入到视频世界模型中。</li>
+        </ul>
+        <p>因此，Fysiverse在视觉保真度、物理真实性两方面领先现有的世界模型。</p>
     </section>
 
     <!-- Pipeline Section with Caption -->
@@ -75,7 +91,7 @@
         </div> -->
 
         <div class="material-video-container">
-            <video id="material-video-player" controls width="2880" height="1920">
+            <video id="material-video-player" controls width="2880" height="1920" loop>
                 <source src="vid/sec2/diff_material.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -104,7 +120,7 @@
         
         <div class="speed-container">
             <div class="speed-video-container">
-                <video id="speed-video-player" controls width="720" height="480">
+                <video id="speed-video-player" controls width="720" height="480" loop>
                     <source src="vid/sec4/speed_1_16.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -124,7 +140,7 @@
 
         <div class="elastic-container">
             <div class="elastic-video-container">
-                <video id="elastic-video-player" controls width="720" height="480">
+                <video id="elastic-video-player" controls width="720" height="480" loop>
                     <source src="vid/sec12/k_1_website.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -183,14 +199,14 @@
         </p> -->
 
         <div class="demo-video-container">
-            <video id="demo-video-player1" controls>
+            <video id="demo-video-player1" controls loop>
                 <source src="vid/sec5/open_laptop_output_3x4.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <p id="demo-caption" class="demo-caption">
                 文本: 单机械臂打开笔记本电脑。
             </p>
-            <video id="demo-video-player2" controls>
+            <video id="demo-video-player2" controls loop>
                 <source src="vid/sec5/place_bread_skillet_output_3x4.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -198,11 +214,19 @@
                 文本: 双机械臂将面包放到平底锅里。
             </p>
         </div>
-
-        
     </section>
 
-
+    <section class="result-section">
+        <h1>定量结果对比（WorldArena评测）</h1>
+        <br>
+        <img src="img/comp.png">
+        <ul class="result-list">
+            <li><strong>开源方法对比：</strong>在开源方法中，Fysiverse-Cog 在运动平滑度（0.7885）、交互质量（0.6780）和轨迹准确性（0.4862）方面取得了最高分；而 Fysiverse-Wan 则在动态程度（0.7212）上表现最佳。</li>
+            <li><strong>与 CogVideoX-5B-I2V 对比：</strong>相较于 CogVideoX-5B-I2V，Fysiverse-Cog 在图像质量上提升了 0.0946，运动平滑度提升了 0.0494，交互质量提升了 0.0840，轨迹准确性提升了 0.1336，深度准确性提升了 0.0115。</li>
+            <li><strong>与 Wan2.2-5B-TI2V 对比：</strong>相较于 Wan2.2-5B-TI2V，Fysiverse-Wan 在图像质量上提升了 0.0428，动态程度提升了 0.2263，交互质量提升了 0.1366，轨迹准确性提升了 0.3192，深度准确性提升了 0.1214。</li>
+            <li><strong>定性分析：</strong>Fysiverse 在 Real-to-Sim 中准确的物理参数估计、Sim-to-Sim 中的物理仿真、Sim-to-Real 中的强物理约束，这三方面协同发力，共同提升了世界模型的物理一致性，同时保持相当的视觉保真度。</li>
+        </ul>
+    </section>
 
     <script src="script.js"></script>
 </body>
