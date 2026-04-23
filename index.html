@@ -22,7 +22,7 @@
         <h1>现有世界模型</h1>
         <br>
         <img src="img/category_1_wm.png">
-        <p>基于视频生成的世界模型：通过在互联网海量的视频中学习通用的世界知识，以条件生成的方式模拟世界（文/图生视频）。例如 OpenAI Sora，Google DeepMind Genie，NVIDIA Cosmos。</p>
+        <p><strong>基于视频生成的世界模型：</strong>通过在互联网海量的视频中学习通用的世界知识，以条件生成的方式模拟世界（文/图生视频）。例如 OpenAI Sora，Google DeepMind Genie，NVIDIA Cosmos。</p>
         <p>局限性：</p>
         <ul class="limitations-list">
             <li><strong>物理精确性存疑：</strong>模型学习的是像素层面的统计规律，而非显式的物理定律。因此，它们生成的动态在细节上常常违反物理常识，即"物理幻觉"问题依然严重。</li>
@@ -31,7 +31,7 @@
         </ul>
         <br>
         <img src="img/category_2_wm.png">
-        <p>隐式世界模型，同样也是通过视频世界模型学习世界的物理规律。例如 V-JEPA。</p>
+        <p><strong>隐式世界模型</strong>，同样也是通过视频世界模型学习世界的物理规律。例如 V-JEPA。</p>
         <p>局限性：</p>
         <ul class="limitations-list">
             <li><strong>缺乏视觉保真度：</strong>由于不生成像素，我们无法直观地"看到"模型的预测结果，这使得模型的调试和解释变得更加困难。</li>
@@ -40,12 +40,12 @@
         <p>总的来说，隐式世界模型为解决Physical AI的核心痛点，特别是数据效率和泛化问题，提供了一条极具前景的道路。它代表了一种从“看清世界”到“理解世界”的认知飞跃，是构建高效、智能决策体的关键技术。</p>
         <br>
         <img src="img/category_3_wm.png">
-        <p>基于3D的世界模型：通过3D重建与生成技术，生成可漫游的3D世界。例如3DGS、NeRF、WorldLabs Marble。</p>
+        <p><strong>基于3D的世界模型：</strong>通过3D重建与生成技术，生成可漫游的3D世界。例如3DGS、NeRF、WorldLabs Marble。</p>
         <br>
         <h1>Fysiverse介绍</h1>
         <br>
         <img src="img/fysiverse_1.png">
-        <p>我们提出 Fysiverse，基于物理的世界模型。</p>
+        <p>我们提出 <strong>Fysiverse</strong>，基于物理的世界模型。</p>
         <ul class="fysiverse-list">
             <li><strong>Real-to-Sim 阶段：</strong>首先实现自动化 3D 场景重建，同时提出 PGReason，基于 OmniFysics 大模型构建的物理属性理解框架，为大模型构建了物理属性知识库，提供物理参数推理依据。</li>
             <li><strong>Sim-to-Sim 阶段：</strong>利用物理引擎完成物体的运动推演。</li>
